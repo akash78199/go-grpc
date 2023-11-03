@@ -1,0 +1,40 @@
+# Below is not the lint and breaking configuration we recommend!
+# This just just what googleapis passes.
+# For lint, we recommend having the single value "DEFAULT" in "use"
+# with no values in "except".
+# For breaking, we recommend having the single value "FILE" in use.
+# See https://docs.buf.build/lint-usage
+# See https://docs.buf.build/breaking-usage
+version: v1beta1
+#name: buf.build/yourorg/myprotos
+deps:
+  #  - buf.build/beta/googleapis
+  - buf.build/grpc-ecosystem/grpc-gateway
+  - buf.build/googleapis/googleapis
+
+build:
+  roots:
+    - proto/
+#    - proto-vendor/
+#  excludes:
+#    - proto/agent/v1alpha1
+lint:
+  # find rules from here - `buf config ls-lint-rules`
+  use:
+    - DEFAULT
+  #    - FILE_LOWER_SNAKE_CASE
+  except:
+    - PACKAGE_DIRECTORY_MATCH
+    - PACKAGE_VERSION_SUFFIX
+    - FIELD_LOWER_SNAKE_CASE
+    - ENUM_ZERO_VALUE_SUFFIX
+    - ENUM_VALUE_PREFIX
+    - ENUM_VALUE_UPPER_SNAKE_CASE
+    - RPC_REQUEST_RESPONSE_UNIQUE
+    - RPC_REQUEST_STANDARD_NAME
+    - RPC_RESPONSE_STANDARD_NAME
+  ignore:
+    - vendor  # exclude vendor protos from linting.
+breaking:
+  use:
+    - WIRE_JSON

@@ -1,0 +1,33 @@
+version: v1
+# documentation: https://docs.buf.build/tutorials/getting-started-with-buf-cli
+# managed:
+#   enabled: true
+plugins:
+  # install plugins from here - https://buf.build/plugins
+  # base dependency
+  - plugin: buf.build/protocolbuffers/go
+    out: proto/stubs
+    opt:
+      - paths=source_relative
+
+  - plugin: buf.build/grpc/go:v1.3.0
+    out: proto/stubs
+    opt:
+      - paths=source_relative
+
+  - plugin: buf.build/grpc-ecosystem/gateway:v2.15.2
+    out: proto/stubs
+    opt:
+      - paths=source_relative
+      - generate_unbound_methods=true
+      - allow_delete_body=true
+
+  - plugin: buf.build/grpc-ecosystem/openapiv2:v2.15.2
+    out: openapi
+    opt:
+      - allow_delete_body=true
+
+  - plugin: buf.build/bufbuild/validate-go:v0.9.1
+    out: proto/stubs
+    opt:
+      - paths=source_relative
